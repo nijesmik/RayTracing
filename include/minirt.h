@@ -2,6 +2,8 @@
 # define MINIRT_H
 
 # include "world.h"
+# include "error.h"
+# include <fcntl.h>
 
 # define WIDTH 400
 # define HEIGHT 300
