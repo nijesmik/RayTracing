@@ -14,7 +14,8 @@ struct s_light
     t_light *next;
 };
 
-t_light *new_light(t_vector origin, t_color color, double bright_ratio);
+t_light	*new_light(char **tabulate);
+// t_light *new_light(t_vector origin, t_color color, double bright_ratio);
 
 /* ------------------------- world ------------------------- */
 typedef struct s_world

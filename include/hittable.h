@@ -31,7 +31,8 @@ struct s_hittable
 };
 
 /* sphere */
-t_hittable *new_sphere(t_vector center, double radius, t_color color);
+// t_hittable *new_sphere(t_vector center, double radius, t_color color);
+t_hittable *new_sphere(char **tabulate);
 t_discriminant sp_discriminant(t_ray *ray, t_hittable *sphere);
 
 /* ------------------------- hit record ------------------------- */

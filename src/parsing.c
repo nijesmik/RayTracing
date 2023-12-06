@@ -1,19 +1,10 @@
 #include "minirt.h"
 
-int	check_components(t_world *world)
-{
-	if (world->camera == NULL)
-		return (ERROR_CAMERA);
-	if (world->light == NULL)
-		return (ERROR_LIGHT);
-	return (SUCCESS);
-}
-
 int	check_id(char *id)
 {
 	if (!ft_strcmp(id, "sp") || !ft_strcmp(id, "pl") || !ft_strcmp(id, "cy"))
 		return (ID_OBJECT);
-	else if (ft_strcmp(id, "L") == 0)
+	if (ft_strcmp(id, "L") == 0)
 		return (ID_LIGHT);
 	/*
 	todo: Ambient, Camera
@@ -33,19 +24,19 @@ int	add_component(t_world *world, char **tabulate)
 {
 	t_hittable	*object;
 	t_light		*light;
-	int			id;
+	char		*id;
 
 	id = check_id(tabulate[0]);
 	if (id == ID_OBJECT)
 	{
-		object = new_object(id, tabulate);
+		object = new_object(tabulate);
 		if (object == NULL)
 			return (FAIL);
 		add_object(world, object);
 	}
 	else if (id == ID_LIGHT)
 	{
-		light = new_light(id, tabulate);
+		light = new_light(tabulate);
 		if (light == NULL)
 			return (FAIL);
 		add_light(world, light);
