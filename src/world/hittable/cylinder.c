@@ -25,7 +25,7 @@ static t_vector get_normal(t_hit_record *rec, t_hittable *cy)
 	return unit(v_subtract(rec->hit_point, center));
 }
 
-static t_bool is_side_hit(t_hit_record *rec, t_ray *ray, t_hittable *cy)
+static t_bool side_hit(t_hit_record *rec, t_ray *ray, t_hittable *cy)
 {
 	t_discriminant d;
 	double t;
@@ -63,16 +63,19 @@ static t_hittable new_cylinder_cap(t_hittable *cy, t_bool is_top)
 t_bool cylinder_hit(t_hit_record *rec, t_ray *ray, t_hittable *cy)
 {
 	t_hittable cap;
+	t_bool is_cap_hit;
+	t_bool is_side_hit;
 
 	cap = new_cylinder_cap(cy, TOP);
-	plane_hit(rec, ray, &cap);
+	is_cap_hit = plane_hit(rec, ray, &cap);
 	cap = new_cylinder_cap(cy, BOTTOM);
-	plane_hit(rec, ray, &cap);
-	if (!is_side_hit(rec, ray, cy))
-		return FALSE;
-	rec->color = cy->color;
-	rec->normal = get_normal(rec, cy);
-	if (is_inside_hit(ray, rec->normal))
-		rec->normal = reverse(rec->normal);
-	return TRUE;
+	is_cap_hit = is_cap_hit | plane_hit(rec, ray, &cap);
+	is_side_hit = side_hit(rec, ray, cy);
+	if (is_side_hit) {
+		rec->color = cy->color;
+		rec->normal = get_normal(rec, cy);
+		if (is_inside_hit(ray, rec->normal))
+			rec->normal = reverse(rec->normal);
+	}
+	return (is_cap_hit | is_side_hit);
 }
