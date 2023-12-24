@@ -20,13 +20,23 @@ static t_vector get_left_top(t_view *view, t_vector z_axis)
 	return left_top;
 }
 
+static t_vector new_x_axis(t_vector view_direction)
+{
+	t_vector x_axis;
+
+	x_axis = v_cross(view_direction, new_vector(0, 1, 0));
+	if (v_length(x_axis) < EPSILON)
+		return new_vector(1, 0, 0);
+	return x_axis;
+}
+
 void set_view_size(int w_width, int w_height, t_view *view)
 {
 	t_vector z_axis;
 	double aspect_ratio;
 
 	z_axis = reverse(view->direction);
-	view->x_axis = v_cross(view->direction, new_vector(0, 1, 0));
+	view->x_axis = new_x_axis(view->direction);
 	view->y_axis = v_cross(z_axis, view->x_axis);
 	view->w_height = w_height;
 	view->w_width = w_width;
