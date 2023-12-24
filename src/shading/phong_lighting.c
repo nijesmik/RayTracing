@@ -16,7 +16,7 @@ t_bool in_shadow(t_world *world, t_direction dir, t_vector hit_point)
 
 	rec = new_hit_record(v_length(dir.to_light), 0);
 	ray = ray_to_light(hit_point, dir);
-	object = world->first_dummy_object.next;
+	object = world->object_list_head.next;
 	while (object)
 	{
 		if (calculate_hit(&rec, &ray, object))
@@ -42,7 +42,7 @@ t_color phong_lighting(t_ray *ray, t_world *world, t_hit_record *rec)
 	t_light *light;
 
 	phong = new_phong_lighting(rec->color, &world->ambient);
-	light = world->first_dummy_light.next;
+	light = world->light_list_head.next;
 	while (light)
 	{
 		dir = new_direction_vectors(ray, rec, light);

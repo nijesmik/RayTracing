@@ -21,7 +21,7 @@ typedef struct s_view
 } t_view;
 
 t_view new_view(t_vector position, t_vector direction, double fov);
-void set_view_size(int w_width, int w_height, t_view *view);
+void init_view(int w_width, int w_height, t_view *view);
 t_vector dir_to_pixel(t_pixel pixel, t_view *view);
 
 /* ------------------------- light ------------------------- */
@@ -51,16 +51,12 @@ t_ambient new_ambient(t_color color, double ratio);
 /* ------------------------- world ------------------------- */
 typedef struct s_world
 {
-    t_hittable first_dummy_object;
+    t_hittable object_list_head;
     t_hittable *last_object;
-    t_light first_dummy_light;
+    t_light light_list_head;
     t_light *last_light;
     t_ambient ambient;
     t_view view;
-    size_t cnt_ambient;
-    size_t cnt_camera;
-    size_t cnt_lights;
-    size_t cnt_objects;
 } t_world;
 
 void add_object(t_world *world, t_hittable *object);

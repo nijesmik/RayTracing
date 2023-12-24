@@ -6,6 +6,14 @@
 # include "utils.h"
 # include "error.h"
 
+typedef struct s_count
+{
+	size_t ambient;
+    size_t camera;
+    size_t lights;
+    size_t objects;
+} t_count;
+
 int read_rt_file(t_world *world, char *open_file);
 
 /* get by id */

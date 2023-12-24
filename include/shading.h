@@ -23,6 +23,7 @@ typedef struct s_direction
 	t_vector reflected;
 }	t_direction;
 
+t_color phong_lighting(t_ray *ray, t_world *world, t_hit_record *rec);
 t_phong_lighting new_phong_lighting(t_color color, t_ambient *ambient);
 t_direction new_direction_vectors(t_ray *ray, t_hit_record *rec, t_light *light);
 void diffuse(t_light *light, t_direction dir, t_phong_lighting *phong);

@@ -5,7 +5,7 @@ int main(int argc, char *argv[])
 	t_world world;
 
 	init_world(&world, argc, argv[1]);
-	set_view_size(WIDTH, HEIGHT, &world.view);
+	init_view(WIDTH, HEIGHT, &world.view);
 	// world.view.fov = 90;
 	// world.view.position = new_vector(0,0,0.2);
 	// world.view.direction = new_vector(-0.5,0,-1);

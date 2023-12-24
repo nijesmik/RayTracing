@@ -10,7 +10,7 @@ t_view new_view(t_vector position, t_vector direction, double fov)
     return view;
 }
 
-static t_vector get_left_top(t_view *view, t_vector z_axis)
+static t_vector new_left_top(t_view *view, t_vector z_axis)
 {
 	t_vector left_top;
 
@@ -30,7 +30,7 @@ static t_vector new_x_axis(t_vector view_direction)
 	return x_axis;
 }
 
-void set_view_size(int w_width, int w_height, t_view *view)
+void init_view(int w_width, int w_height, t_view *view)
 {
 	t_vector z_axis;
 	double aspect_ratio;
@@ -43,7 +43,7 @@ void set_view_size(int w_width, int w_height, t_view *view)
 	view->n_width = tan(view->fov * PI / 360.0) * FOCAL_LENGTH;
 	aspect_ratio = (double)w_height / (double)w_width;
 	view->n_height = view->n_width * aspect_ratio;
-	view->left_top = get_left_top(view, z_axis);
+	view->left_top = new_left_top(view, z_axis);
 }
 
 t_vector dir_to_pixel(t_pixel pixel, t_view *view)

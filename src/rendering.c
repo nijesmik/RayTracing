@@ -1,5 +1,5 @@
 #include "minilibx.h"
-#include "minirt.h"
+#include "shading.h"
 
 static int convert_hex(double color_ratio)
 {
@@ -27,7 +27,7 @@ t_color ray_tracing(t_ray *ray, t_world *world)
 	t_hittable *object;
 
 	rec = new_hit_record(INFINITY, EPSILON);
-	object = world->first_dummy_object.next;
+	object = world->object_list_head.next;
 	while (object)
 	{
 		calculate_hit(&rec, ray, object);
