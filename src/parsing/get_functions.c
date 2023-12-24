@@ -10,11 +10,11 @@ t_color get_color(const char *rgb_string)
 
 	tmp = ft_strdup(rgb_string);
 	token = ft_strtok(tmp, ",");
-	r = (double)ft_atof(token) / 255.0;
+	r = ft_atof(token) / 255.0;
 	token = ft_strtok(NULL, ",");
-	g = (double)ft_atof(token) / 255.0;
+	g = ft_atof(token) / 255.0;
 	token = ft_strtok(NULL, ",");
-	b = (double)ft_atof(token) / 255.0;
+	b = ft_atof(token) / 255.0;
 	free(tmp);
     /* rgb valid check fucntion */
 	return (new_color(r, g, b));
