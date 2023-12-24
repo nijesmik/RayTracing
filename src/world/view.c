@@ -25,7 +25,6 @@ void set_view_size(int w_width, int w_height, t_view *view)
 	t_vector z_axis;
 	double aspect_ratio;
 
-	view->direction = unit(view->direction);
 	z_axis = reverse(view->direction);
 	view->x_axis = v_cross(view->direction, new_vector(0, 1, 0));
 	view->y_axis = v_cross(z_axis, view->x_axis);

@@ -40,7 +40,7 @@ void	get_view(t_world *world, char **tab)
     double      fov;
 
 	position = get_vector(tab[1]);
-	direction = get_vector(tab[2]);
+	direction = unit(get_vector(tab[2]));
 	fov = ft_atof(tab[3]);
 	world->view = new_view(position, direction, fov);
 }
